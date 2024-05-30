@@ -2,39 +2,29 @@
 let express=   require('express')
 
  let app=   express()
-
- app.get('/',(req,res)=>{
-    res.send('helllo')
- })
-
-//  app.get('/:a',(req,res)=>{
-//     let {a}=req.params
-//     console.log(a);
-//     res.send(a)
-
-//  })
-
- app.get('/search',(req,res)=>{
-    console.log(req.query);
-    res.send('hello')
-
-
- })
-//  app.get('/cat',(req,res)=>{
-//     res.send('cat')
+ app.use(express.urlencoded({extended:true}))
+ app.use('/home' ,   express.static('public'))
+//  app.set('view engine', 'ejs')
+   let arr=[1,2,3,4,5]      
+ app.get('/cat',(req,res)=>{
+    res.send('cat')
     
-//  })
-//  app.get('/dog',(req,res)=>{
-//     res.send('dog')
+ })
+ app.get('/todo',(req,res)=>{
+   res.json(arr)
 
-//  })
+ })
+ app.post('/todo',(req,res)=>{
+   console.log(req.body,"jeje");
+   let {data}=req.body
+   let data1=  parseInt(data)
+   arr.push(data1)
+   res.send('hehhe')
 
-
- app.get('*',(req,res)=>{
-    res.send('kya krna chah rhe')
  })
 
  app.listen(5000,()=>{
     console.log('server running...');
  })
 
+// csr vs ssr 
